@@ -1,0 +1,56 @@
+.modal-header
+  h3.modal-title Add new report
+form.modal-body.form-horizontal(name='form')
+  .form-group
+    label.col-sm-2.control-label(for='report_type') Report Type
+    .col-sm-10
+      select.form-control(ng-model='model.reportType', name='report_type')
+        option Public Report
+        option Bank Report
+  div(ng-show='publicTypeSelected')
+    .form-group
+      label.col-sm-2.control-label(for='sub_type') Record Type
+      .col-sm-10
+        select.form-control(ng-model='model.subType', name='sub_type')
+          option(ng-repeat='it in publicTypes') {{it}}
+    .form-group
+      label.col-sm-2.control-label(for='record_id') Record ID
+      .col-sm-10
+        input.form-control(type='text', ng-model='model.recordId', name='record_id')
+    .form-group
+      label.col-sm-2.control-label(for='record_id') Record Date
+      .col-sm-10
+        input.form-control(type='date', ng-model='model.recordDate', name='record_date')
+    .form-group
+      label.col-sm-2.control-label(for='guilty') Guilty
+      .col-sm-10
+        input.form-control(type='checkbox',ng-model='model.guilty', name='guilty')
+  div(ng-show='bankTypeSelected')
+    .form-group
+      label.col-sm-2.control-label(for='sub_type') Record Type
+      .col-sm-10
+        select.form-control(ng-model='model.subType', name='sub_type')
+          option(ng-repeat='it in bankTypes') {{it}}
+    .form-group
+      label.col-sm-2.control-label(for='bank') Bank
+      .col-sm-10
+        input.form-control(type='text', ng-model='model.bank', name='bank')
+    .form-group
+      label.col-sm-2.control-label(for='open_date') Open Date
+      .col-sm-10
+        input.form-control(type='date', ng-model='model.openDate', name='open_date')
+    .form-group
+      label.col-sm-2.control-label(for='last_amount') Last Amount
+      .col-sm-10
+        input.form-control(type='number', ng-model='model.lastAmount', name='last_amount')
+    .form-group
+      label.col-sm-2.control-label(for='guilty') # Defaults
+      .col-sm-10
+        input.form-control(type='number',ng-model='model.defaults', name='guilty')
+  .form-group.has-error
+    p.help-block(ng-show='form.errors.length')
+      | Unable to add report.
+    p.help-block(ng-show='errors.other') {{ errors.other }}
+.modal-footer
+  button.btn.btn-primary(ng-click="ok()") OK
+  button.btn.btn-warning(ng-click="cancel()") Cancel

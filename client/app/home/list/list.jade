@@ -1,0 +1,15 @@
+h1.page-header Employees:
+button.btn-block(ng-click='addNewEmployee()') Add New Employee
+table.table
+  tr
+    th Photo
+    th Name
+    th Aadhaar Number
+    th Aadhaar Score
+  tr(ng-repeat='employee in employees')
+    td
+      img(src='data:image/jpeg;base64,{{employee.photo}}')
+    td {{employee.poi.name}}
+    td
+      a(ng-href='/home/detail/{{employee._id}}') {{employee.aadhaar}}
+    td(ng-class='{}') {{employee.score}}/800

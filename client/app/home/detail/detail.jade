@@ -1,0 +1,53 @@
+h1.page-header Employee details
+.container.employee-info
+  .row
+    .col-sm-3
+      img.img-circle(ng-src='data:image/jpeg;base64,{{model.photo}}')
+    .col-sm-9
+      .row
+        .col-sm-12 {{model.poi.name}} ({{model.aadhaar}})
+      .row
+        .col-sm-12 Born {{model.poi.dob}}
+      .row
+        .col-sm-12 {{model.poa.house}} {{model.poa.street}},
+      .row
+        .col-sm-12 {{model.poa.vtc}},
+      .row
+        .col-sm-12 {{model.poa.subdist}} Subdistrict, {{model.poa.dist}} District
+      .row
+        .col-sm-12 {{model.poa.state}} {{model.poa.pc}}
+      .row
+        .col-sm-12 Post Office: {{model.poa.po}}
+      .row
+        .col-sm-12
+          button.btn.btn-primary(ng-click='addReport()') Add a report
+h2 Aadhaar Score
+  .container
+    .row(ng-hide='!model.score')
+      .guage(ng-radial-gauge,data='gauge', major-graduations= '5', minor-graduations='3')
+h2 Public Records
+table.table
+  tr
+    th Record ID
+    th Record Date
+    th Record Type
+    th Verdict
+  tr(ng-repeat='it in model.publicRecords')
+    td {{it.recordId}}
+    td {{it.recordDate | date }}
+    td {{it.kind}}
+    td {{it.guilty ? 'Guilty' : 'Not Guilty'}}
+h2 Bank Records
+table.table
+  tr
+    th Bank
+    th Account Type
+    th Open Date
+    th Last Amount
+    th # of Defaults
+  tr(ng-repeat='it in model.bankRecords')
+    td {{it.bank}}
+    td {{it.kind}}
+    td {{it.openDate | date }}
+    td {{it.amount | currency:"Rs."}}
+    td {{it.defaults}}

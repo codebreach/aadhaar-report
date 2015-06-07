@@ -1,0 +1,32 @@
+h1.page-header Add Employee:
+form.form-horizontal(name='form')
+  .form-group
+    label.col-sm-2.control-label(for='aadhaar_number') Aadhaar Number
+    .col-sm-10
+      input#aadhaar_number.form-control(
+        type='number', placeholder='1234567890', required='', ng-model='model.aadhaar', ng-disabled='phaseOneDone')
+  .form-group
+    label.col-sm-2.control-label(for='full_name') Full Name
+    .col-sm-10
+      input#full_name.form-control(
+        type='text', placeholder='Rahul Tiwari', required='', ng-model='model.full_name',
+        ng-disabled='phaseOneDone')
+  .form-group
+    label.col-sm-2.control-label(for='pin_code') Pin Code
+    .col-sm-10
+      input#pin_code.form-control(name='pin_code', type='text', placeholder='110011', required='',
+        ng-model='model.pincode', ng-disabled='phaseOneDone')
+  .form-group(ng-show='phaseOneDone')
+    label.control-label.col-sm-2(for='otp') OTP
+    .col-sm-10
+      input#otp.form-control(name='otp', type='text', placeholder='123123', ng-model='model.otp')
+      p.help-block A SMS OTP has been sent to the Employee. Entering OTP gives concent to access Employee's data.
+  .form-group.has-error
+    p.help-block(ng-show='form.aadhaar_number.$error.mongoose')
+      | Unable to validate Aadhaar
+    p.help-block {{ errors.other }}
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      button.btn.btn-default(ng-click='verify()', ng-hide='phaseOneDone') Verify Aadhaar
+      button.btn.btn-default(ng-click='verify2()', ng-show='phaseOneDone') Confirm OTP
+
