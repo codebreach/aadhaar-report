@@ -10,10 +10,12 @@ angular.module('aadhaarApp')
     });
 
     $scope.currentUser = Auth.getCurrentUser();
-    $http.get('/api/employees/for/' + $scope.currentUser._id)
+    $scope.currentUser.$promise.then(function() {
+      $http.get('/api/employees/for/' + $scope.currentUser._id)
       .then(function(employees) {
         $scope.employees = employees.data;
       });
+    });
     $scope.addNewEmployee = function() {
       $location.path('/home/add');
     }
