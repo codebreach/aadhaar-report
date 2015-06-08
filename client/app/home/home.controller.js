@@ -2,7 +2,7 @@
 
 angular.module('aadhaarApp')
   .controller('HomeCtrl', function ($scope, Auth, $location, $http) {
-    $scope.message = 'Hello';
+    $scope.notLoaded = true;
     Auth.isLoggedInAsync(function(isLoggedIn) {
       if (!isLoggedIn) {
         $location.path('/login');
@@ -13,6 +13,7 @@ angular.module('aadhaarApp')
     $scope.currentUser.$promise.then(function() {
       $http.get('/api/employees/for/' + $scope.currentUser._id)
       .then(function(employees) {
+        $scope.notLoaded = false;
         $scope.employees = employees.data;
       });
     });

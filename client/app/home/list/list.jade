@@ -6,10 +6,14 @@ table.table
     th Name
     th Aadhaar Number
     th Aadhaar Score
+  tr(ng-show='notLoaded')
+    td Loading...
+  tr(ng-show='employees.length == 0 && !notLoaded')
+    td No Employees
   tr(ng-repeat='employee in employees')
     td
       img(src='data:image/jpeg;base64,{{employee.photo}}')
     td {{employee.poi.name}}
     td
       a(ng-href='/home/detail/{{employee._id}}') {{employee.aadhaar}}
-    td(ng-class='{}') {{employee.score}}/800
+    td(ng-class='{}') {{employee.score | number:2}}/800
